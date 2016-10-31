@@ -1,5 +1,5 @@
 import unittest
-from balance_scale import BalanceScale
+from balance_scale import BalanceScale, BalanceUsedTooManyTimesError
 
 class BalanceScaleTestCase(unittest.TestCase):
     def setUp(self):
@@ -31,3 +31,12 @@ class BalanceScaleTestCase(unittest.TestCase):
         right = [1, 2, 3]
 
         self.assertEqual(ValueError, self.scale.compare(left, right))
+
+
+    def test_compare_raises_BalanceUsedTooManyTimesError_if_used_more_than_3_times(self):
+        self.scale.compare([0], [0])
+        self.scale.compare([0], [0])
+        self.scale.compare([0], [0])
+
+        self.assertRaises(BalanceUsedTooManyTimesError, self.scale.compare, [0], [0])
+            
