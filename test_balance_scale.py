@@ -10,7 +10,7 @@ class BalanceScaleTestCase(unittest.TestCase):
         right = [1, 1, 1]
 
         # Return -1 if fail.
-        self.assertEqual(self.scale.compare(left, right, -1))
+        self.assertEqual(self.scale.compare(left, right), -1)
 
     def test_compare_returns_zero_when_left_equals_right(self):
         left = [1, 1, 1]
@@ -30,7 +30,7 @@ class BalanceScaleTestCase(unittest.TestCase):
         left = [1]
         right = [1, 2, 3]
 
-        self.assertEqual(ValueError, self.scale.compare(left, right))
+        self.assertRaises(ValueError, self.scale.compare(left, right))
 
 
     def test_compare_raises_BalanceUsedTooManyTimesError_if_used_more_than_3_times(self):
